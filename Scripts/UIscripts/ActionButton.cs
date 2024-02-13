@@ -12,7 +12,9 @@ public class ActionButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playertrigger = FindObjectOfType<PlayerController>().GetComponentInChildren<TriggerAreaScript>();
+        if(FindObjectOfType<PlayerController>()) {
+            playertrigger = FindObjectOfType<PlayerController>().GetComponentInChildren<TriggerAreaScript>();
+        }
         gm = FindObjectOfType<GameManagerScript>();
         actionButton.SetActive(false);
         buttonText.text = "";
@@ -21,18 +23,24 @@ public class ActionButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playertrigger.inRangeDialogue == true && gm.inDialogue == false) {
-            actionButton.SetActive(true);
-            buttonText.text = "Talk";
-        } else if(playertrigger.inRangeChest == true && gm.inDialogue == false) {
-            actionButton.SetActive(true);
-            buttonText.text = "Open";
-        } else if(playertrigger.inRangeDoor == true && gm.inDialogue == false) {
-            actionButton.SetActive(true);
-            buttonText.text = "Open";
+        if(playertrigger == null ) {
+            if(FindObjectOfType<PlayerController>()) {
+                playertrigger = FindObjectOfType<PlayerController>().GetComponentInChildren<TriggerAreaScript>();
+            }
         } else {
-            actionButton.SetActive(false);
-            buttonText.text = "";
+            if(playertrigger.inRangeDialogue == true && gm.inDialogue == false) {
+                actionButton.SetActive(true);
+                buttonText.text = "Talk";
+            } else if(playertrigger.inRangeChest == true && gm.inDialogue == false) {
+                actionButton.SetActive(true);
+                buttonText.text = "Open";
+            } else if(playertrigger.inRangeDoor == true && gm.inDialogue == false) {
+                actionButton.SetActive(true);
+                buttonText.text = "Open";
+            } else {
+                actionButton.SetActive(false);
+                buttonText.text = "";
+            }
         }
     }
 }
