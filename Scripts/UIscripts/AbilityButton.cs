@@ -5,35 +5,33 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class AbilityButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler
+public class AbilityButton : MonoBehaviour
 {
-    public PlayerStatus player;
     public int abilityNumber;
     private BaseAbility ability;
+    public GameObject playermenu, enemyselects, abilitymenu;
+    public Image abilityImage;
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInParent<CombatMenu>().member;
-        ability = player.GetComponent<ActiveAbilities>().activeAbilities[abilityNumber-1];
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(ability == null)
+        {
+            abilityImage.sprite = playermenu.GetComponent<CombatMenu>().member.GetComponent<ActiveAbilities>().activeAbilities[abilityNumber].UIicon;
+            ability = playermenu.GetComponent<CombatMenu>().member.GetComponent<ActiveAbilities>().activeAbilities[abilityNumber];
+        }
     }
 
     public void AbilityAction()
     {
-
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        //do your stuff when highlighted
-    }
-    public void OnSelect(BaseEventData eventData)
-    {
-        //do your stuff when selected
+        //attack
+        enemyselects.SetActive(true);
+        playermenu.SetActive(false);
+        abilitymenu.SetActive(false);
     }
 }

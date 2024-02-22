@@ -19,7 +19,7 @@ public class CombatMenuAbility : MonoBehaviour
         
     }
 
-    void AbilityButton()
+    public void AbilityButton()
     {
         combatmenu[0].gameObject.SetActive(false);
         combatmenu[1].gameObject.SetActive(false);
