@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AlphaPlayerCombat : MonoBehaviour {
+	public GameObject enemyTarget;
+	public BaseAbility abilityToCast;
 	public float currentTime, finishedTime;
 	public bool playerActive = false;
 
@@ -20,7 +22,7 @@ public class AlphaPlayerCombat : MonoBehaviour {
 		}
 	}
 
-	public void afterTurn() {
+	public void AfterTurn() {
 		playerActive = false;
 		currentTime = 0.0f;
 	}

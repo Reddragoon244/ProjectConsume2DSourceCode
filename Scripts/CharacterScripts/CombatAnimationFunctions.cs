@@ -47,6 +47,7 @@ public class CombatAnimationFunctions : MonoBehaviour
         anim.SetBool("UltimateCasted", UltimateCasted);
         anim.SetBool("Stasis", Stasis);
         anim.SetBool("Idle", Idle);
+
         if(Spawn == true)
         {
             Instantiate(element, eleLocation.position, eleLocation.rotation);
@@ -79,5 +80,26 @@ public class CombatAnimationFunctions : MonoBehaviour
     {
         Cast = false;
         Casting = true;
+    }
+
+    public void CastEnd()
+    {
+        Debug.Log("CAF in here");
+        Cast = false;
+        Casting = false;
+        Casted = true;
+
+        if(GetComponentInChildren<AlphaPlayerCombat>().abilityToCast != null) {
+            GameObject abil = Instantiate(GetComponentInChildren<AlphaPlayerCombat>().abilityToCast.animations[0], GetComponent<AlphaPlayerCombat>().enemyTarget.GetComponentInChildren<BoxCollider2D>().transform.position, Quaternion.identity, GetComponent<AlphaPlayerCombat>().enemyTarget.GetComponentInChildren<BoxCollider2D>().transform);
+            
+            abil.GetComponent<AbilityAnimationFunctions>().cast = GetComponentInParent<CombatCharacterStatus>();
+
+            //deal damage
+            if(abil.GetComponent<AbilityAnimationFunctions>().ability.aoe != true)
+                abil.GetComponent<AbilityAnimationFunctions>().enemies[0] = GetComponent<AlphaPlayerCombat>().enemyTarget.GetComponent<EnemyStatus>();
+            
+            GetComponentInChildren<AlphaPlayerCombat>().abilityToCast = null;
+            GetComponent<AlphaPlayerCombat>().enemyTarget = null;
+        }
     }
 }

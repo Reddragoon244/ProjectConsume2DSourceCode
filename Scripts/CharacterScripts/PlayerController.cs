@@ -49,44 +49,48 @@ public class PlayerController : MonoBehaviour {
     void Action() {
         if(Input.GetButtonDown("Fire1"))//Action Button AKA:A
         {
-            //Dialogue
-            if(playertrigger.inRangeDialogue == true) 
-            {
-                if(gm.inDialogue == true) 
+            if(gm.inMenu == false) {
+                //Dialogue
+                if(playertrigger.inRangeDialogue == true) 
                 {
-                    if(FindObjectOfType<DialogueSystem>().DialogueText.dialogueDone == false)
-                        FindObjectOfType<DialogueSystem>().DialogueText.finishtext();
-                    else if(FindObjectOfType<DialogueSystem>().DialogueText.dialogueDone == true)
+                    if(gm.inDialogue == true) 
                     {
-                        gm.inDialogue = false;
-                        gm.DialogueAction();
+                        if(FindObjectOfType<DialogueSystem>().DialogueText.dialogueDone == false)
+                            FindObjectOfType<DialogueSystem>().DialogueText.finishtext();
+                        else if(FindObjectOfType<DialogueSystem>().DialogueText.dialogueDone == true)
+                        {
+                            gm.inDialogue = false;
+                            gm.DialogueAction();
+                        }
+                    } 
+                    else if(gm.inDialogue == false) 
+                    {
+                        gm.inDialogue = true;
+                        gm.DialogueAction(playertrigger.character.GetComponentInChildren<DialogueScript>());
                     }
-                } 
-                else if(gm.inDialogue == false) 
+                } else if(playertrigger.inRangeDoor == true) 
                 {
-                    gm.inDialogue = true;
-                    gm.DialogueAction(playertrigger.character.GetComponentInChildren<DialogueScript>());
+                    if(gm.GetComponent<SceneManagementSystem>().CheckScene() == "InsideBuilding")
+                    {
+                        playertrigger.inRangeChest = false;
+                        playertrigger.inRangeDialogue = false;
+                        playertrigger.inRangeDoor = false;
+                        gm.GetComponent<SceneManagementSystem>().SceneChange("AlphaGame");
+                        gm.playeroutside = true;
+                    } else if(gm.GetComponent<SceneManagementSystem>().CheckScene() == "AlphaGame")
+                    {
+                        playertrigger.inRangeChest = false;
+                        playertrigger.inRangeDialogue = false;
+                        playertrigger.inRangeDoor = false;
+                        gm.playeroutside = false;
+                        gm.GetComponent<SceneManagementSystem>().SceneChange("InsideBuilding");
+                    } else {
+                        Debug.Log(gm.GetComponent<SceneManagementSystem>().CheckScene());
+                    }
+                } else if(playertrigger.inRangeChest == true) 
+                {
+                    
                 }
-            } else if(playertrigger.inRangeDoor == true) 
-            {
-                if(gm.GetComponent<SceneManagementSystem>().CheckScene() == "InsideBuilding")
-                {
-                    playertrigger.inRangeChest = false;
-                    playertrigger.inRangeDialogue = false;
-                    playertrigger.inRangeDoor = false;
-                    gm.GetComponent<SceneManagementSystem>().SceneChange("AlphaGame");
-                } else if(gm.GetComponent<SceneManagementSystem>().CheckScene() == "AlphaGame")
-                {
-                    playertrigger.inRangeChest = false;
-                    playertrigger.inRangeDialogue = false;
-                    playertrigger.inRangeDoor = false;
-                    gm.GetComponent<SceneManagementSystem>().SceneChange("InsideBuilding");
-                } else {
-                    Debug.Log(gm.GetComponent<SceneManagementSystem>().CheckScene());
-                }
-            } else if(playertrigger.inRangeChest == true) 
-            {
-                
             }
         }
 

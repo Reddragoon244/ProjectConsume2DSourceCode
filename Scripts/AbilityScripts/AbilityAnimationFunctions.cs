@@ -61,8 +61,10 @@ public class AbilityAnimationFunctions : MonoBehaviour
         {
             foreach(CombatCharacterStatus enemy in enemies)
             {
-                if(enemy != null)
-                    enemy.takeDamage(cast.dealPhysicalDamage());
+                if(enemy != null) {
+                    //where we deal combat damage
+                    enemy.takeDamage(cast.dealAbilityDamage(ability));
+                }
             }    
         }
     }

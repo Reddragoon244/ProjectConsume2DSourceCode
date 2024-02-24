@@ -11,6 +11,7 @@ public class GameManagerScript : MonoBehaviour {
     public bool inCombat = false; 
     public bool in2dSpace = false;
     public bool in3dSpace = false;
+    public bool playeroutside = true;
     
     public static GameManagerScript instance;
     

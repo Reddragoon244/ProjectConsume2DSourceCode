@@ -22,6 +22,12 @@ public class CombatCharacterStatus : MonoBehaviour {
     public int GainEXP;
     public int level;
     public CombatCharacter.status[] status;
+    public int dealAbilityDamage(BaseAbility ability) {
+        manaCurrent -= ability.manaUse;
+        currentDamage = ability.damage;
+
+        return (int)currentDamage;
+    }
     public int dealPhysicalDamage() {
         currentDamage = strength;
 

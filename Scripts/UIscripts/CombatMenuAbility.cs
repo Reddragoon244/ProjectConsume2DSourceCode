@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CombatMenuAbility : MonoBehaviour
 {
-    public GameObject playermenu;
-    public GameObject AbilityMenu;
-    public GameObject[] combatmenu = new GameObject[4];
+    public GameObject playermenu, AbilityMenu, combatmenu;
+    public BaseAbility ability;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +20,7 @@ public class CombatMenuAbility : MonoBehaviour
 
     public void AbilityButton()
     {
-        combatmenu[0].gameObject.SetActive(false);
-        combatmenu[1].gameObject.SetActive(false);
-        combatmenu[2].gameObject.SetActive(false);
-        combatmenu[3].gameObject.SetActive(false);
-        AbilityMenu.gameObject.SetActive(true);
+        combatmenu.SetActive(false);
+        AbilityMenu.SetActive(true);
     }
 }

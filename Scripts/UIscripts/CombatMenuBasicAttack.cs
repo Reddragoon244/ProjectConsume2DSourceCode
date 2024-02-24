@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CombatMenuBasicAttack : MonoBehaviour
 {
-    public GameObject playermenu, enemyselects;
+    public GameObject playermenu, enemyselects, combatmenu;
     public BaseAbility basicAttack = null;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,6 @@ public class CombatMenuBasicAttack : MonoBehaviour
     public void AttackButton() {
       //attack
       enemyselects.SetActive(true);
-      playermenu.SetActive(false);
+      combatmenu.SetActive(false);
     }
 }

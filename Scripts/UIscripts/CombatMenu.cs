@@ -13,6 +13,5 @@ public class CombatMenu : MonoBehaviour
     {
         memberNumber = memSelect.MemberNumber;
         member = FindObjectOfType<AlphaCombatManager>().members[memberNumber-1].GetComponent<PlayerStatus>();
-        FindObjectOfType<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
     }
 }
